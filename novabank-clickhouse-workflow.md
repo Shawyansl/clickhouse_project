@@ -90,13 +90,17 @@ Deliverable: final `README.md`
 
 ## Progress Tracker
 
-- [ ] Phase 0: Setup
-- [ ] Phase 1: Access-pattern matrix
-- [ ] Phase 2: Design decisions
-- [ ] Phase 3: DDL
+- [x] Phase 0: Setup
+- [x] Phase 1: Access-pattern matrix (`docs/access_patterns.md`)
+- [x] Phase 2: Design decisions (`docs/design.md`)
+- [x] Phase 3: DDL + queries Q1–Q6
 - [ ] Phase 4: Data
 - [ ] Phase 5: Benchmarks
 - [ ] Phase 6: Documentation
 
 Notes / decisions made so far:
-- (add here as we go)
+- `tx_raw` ORDER BY customer-first for Q2; dashboards on separate AggregatingMergeTree + MVs
+- Q1/Q6 share `tx_daily_agg`; Q3/Q6 share `merchant_daily_agg`
+- Q4 vs Q6 branches: two tables (`branch_daily_agg` vs `country_branch_daily_agg`)
+- Q5: calendar hour ATM agg; thresholds in HAVING
+- Q6: compose aggs, not raw
