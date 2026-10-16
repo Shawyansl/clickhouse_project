@@ -62,20 +62,6 @@ def main() -> int:
         parts = re.split(r"(?im)^\s*--\s*Naive baseline[^\n]*", source, maxsplit=1)
         optimized = statements(parts[0])
         baseline = statements(parts[1]) if len(parts) > 1 else []
-        if q == 5:
-            # The shipped sample data is fixed to September 2026. Keep Q5's
-            # seven-day window inside that data range for a useful benchmark.
-            optimized = [s.replace("toStartOfHour(now() - INTERVAL 7 DAY)",
-                                    "toDateTime('2026-09-21 00:00:00')") for s in optimized]
-            baseline = [s.replace("now() - INTERVAL 7 DAY",
-                                  "toDateTime('2026-09-21 00:00:00')") for s in baseline]
-        if q == 4:
-            # Current date is after the generated September sample; benchmark
-            # the same branch query over the sample's full month.
-            optimized = [s.replace("day >= today() - 30",
-                                    "day >= toDate('2026-09-01')") for s in optimized]
-            baseline = [s.replace("toStartOfDay(today() - 30)",
-                                  "toDateTime('2026-09-01 00:00:00')") for s in baseline]
         # Q6 is a multi-panel dashboard: measure each panel independently.
         for i, sql in enumerate(optimized, 1):
             label = f"q{q}_optimized" + (f"_panel{i}" if q == 6 else "")

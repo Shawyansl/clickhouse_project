@@ -16,18 +16,18 @@ Limit (preliminary LIMIT)
             Parts: 1 | Granules: 2
             Output: any(merchant_category), merchant_id, any(merchant_name), tx_count, customers_state, total_amount
             Prewhere filter
-            Prewhere filter column:  country = \'DE\' AND merchant_category = \'grocery\' AND day <= \'2026-09-30\' AND day >= \'2026-09-01\'
+            Prewhere filter column:  country = \'DE\' AND merchant_category = \'grocery\' AND day <= 20708 AND day >= 20678
             Indexes:
               Min-Max
                 Keys:
                   day
-                Condition: and((day in (-Inf, 20726]), (day in [20697, +Inf)))
+                Condition: and((day in (-Inf, 20708]), (day in [20678, +Inf)))
                 Parts: 1/1
                 Granules: 2/2
               Partition
                 Keys:
                   toYYYYMM(day)
-                Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202609, +Inf)))
+                Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202608, +Inf)))
                 Parts: 1/1
                 Granules: 2/2
               PrimaryKey
@@ -35,7 +35,7 @@ Limit (preliminary LIMIT)
                   country
                   merchant_category
                   day
-                Condition: and((merchant_category in [\'grocery\', \'grocery\']), and((country in [\'DE\', \'DE\']), and((day in (-Inf, 20726]), (day in [20697, +Inf)))))
+                Condition: and((merchant_category in [\'grocery\', \'grocery\']), and((country in [\'DE\', \'DE\']), and((day in (-Inf, 20708]), (day in [20678, +Inf)))))
                 Parts: 1/1
                 Granules: 2/2
                 Search Algorithm: binary search

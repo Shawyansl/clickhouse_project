@@ -1,11 +1,11 @@
 {
-  "query_id": "phase5_q1_raw_baseline_e6aa4e33a0ab",
-  "query_duration_ms": 13,
-  "read_rows": 1000300,
-  "read_bytes": 32000956,
+  "query_id": "phase5_q1_raw_baseline_6079a18d6f6e",
+  "query_duration_ms": 40,
+  "read_rows": 1000304,
+  "read_bytes": 32001052,
   "result_rows": 12,
-  "result_bytes": 1442,
+  "result_bytes": 1434,
   "exception": "",
   "label": "q1_raw_baseline",
-  "recorded_at_utc": "2026-10-16T17:11:44.496267+00:00"
+  "recorded_at_utc": "2026-10-16T17:22:45.455368+00:00"
 }

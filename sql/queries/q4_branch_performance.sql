@@ -1,4 +1,4 @@
--- Q4: Branch performance (default last 30 days), per branch per day
+-- Q4: Branch performance for the 30 days ending on the latest branch data date
 -- Columns: day, branch_id, count, unique customers,
 --          total deposit, total withdrawal, total transfer
 
@@ -12,7 +12,7 @@ SELECT
     sum(transfer_amount)            AS total_transfer
 FROM clickhouse_course.branch_daily_agg
 WHERE branch_id = 42
-  AND day >= today() - 30
+  AND day >= (SELECT max(day) - 30 FROM clickhouse_course.branch_daily_agg)
 GROUP BY day, branch_id
 ORDER BY day;
 
@@ -28,7 +28,7 @@ SELECT
     sumIf(amount, transaction_type = 'bank_transfer')   AS total_transfer
 FROM clickhouse_course.tx_raw
 WHERE branch_id = 42
-  AND tx_time >= toStartOfDay(today() - 30)
+  AND tx_time >= (SELECT toStartOfDay(max(tx_time)) - INTERVAL 30 DAY FROM clickhouse_course.tx_raw)
   AND transaction_type IN ('cash_deposit', 'atm_withdrawal', 'bank_transfer')
 GROUP BY day, branch_id
 ORDER BY day;

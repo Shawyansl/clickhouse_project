@@ -1,4 +1,5 @@
 -- Q3: Top 20 merchants by card payment amount
+-- Date window: 30 days ending on the latest date currently in merchant_daily_agg.
 -- Filters (date range, country, category) are all in the WHERE clause.
 -- Drop the country / category lines when the dashboard filter is empty.
 
@@ -11,7 +12,8 @@ SELECT
     sum(total_amount)             AS total,
     total / transactions          AS avg_amount
 FROM clickhouse_course.merchant_daily_agg
-WHERE day BETWEEN toDate('2026-09-01') AND toDate('2026-09-30')
+WHERE day BETWEEN (SELECT max(day) - 30 FROM clickhouse_course.merchant_daily_agg)
+               AND (SELECT max(day) FROM clickhouse_course.merchant_daily_agg)
   AND country = 'DE'
   AND clickhouse_course.merchant_daily_agg.merchant_category = 'grocery'
 GROUP BY merchant_id
@@ -30,8 +32,8 @@ SELECT
     avg(amount)                   AS avg_amount
 FROM clickhouse_course.tx_raw
 WHERE transaction_type = 'card_payment'
-  AND tx_time >= toDateTime('2026-09-01 00:00:00')
-  AND tx_time <  toDateTime('2026-10-01 00:00:00')
+  AND tx_time >= (SELECT toStartOfDay(max(tx_time)) - INTERVAL 30 DAY FROM clickhouse_course.tx_raw)
+  AND tx_time <  (SELECT toStartOfDay(max(tx_time)) + INTERVAL 1 DAY FROM clickhouse_course.tx_raw)
   AND country = 'DE'
   AND clickhouse_course.tx_raw.merchant_category = 'grocery'
 GROUP BY merchant_id

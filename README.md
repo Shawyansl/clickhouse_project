@@ -25,15 +25,23 @@ docker compose ps
 
 ### 2. Load the project tables and sample data
 
-Do this only when using a **fresh, empty database volume**:
+On a fresh, empty database volume, load the schema and the default sample dataset:
 
 ```bash
 bash data_gen/run_phase4.sh
 ```
 
-This script creates the raw and aggregate tables, creates materialized views, inserts about one million synthetic transactions and 300 extra fraud examples, then runs sanity checks. A materialized view automatically updates the aggregate tables when new rows are inserted into `tx_raw`.
+This script creates the raw and aggregate tables, creates materialized views, inserts one million synthetic transactions and 300 extra fraud examples, then runs sanity checks. A materialized view automatically updates the aggregate tables when new rows are inserted into `tx_raw`.
 
-**Do not run the loader again on a database that already has project data.** The table creation statements use `IF NOT EXISTS`, but the inserts still happen each time, so each rerun adds duplicates. The database in this workspace already has 2,000,600 rows because the loader was run twice. For a clean start, you can delete the Docker volume and all its data with `docker compose down -v`, start ClickHouse again, then run the loader once. This deletion cannot be undone.
+The loader now checks `tx_raw` before doing anything and refuses to run if rows are already there. This prevents accidental duplicate loads. The database in this workspace currently has 1,000,300 rows: the intended one-time load. To create a clean dataset, remove the Docker volume with `docker compose down -v`, start ClickHouse again, then run the loader once. **This permanently deletes the database volume.**
+
+To create a larger dataset for benchmarking, set `TX_ROWS` to the desired number of generated transactions. For example, a 10-million-row load plus 300 fraud examples:
+
+```bash
+TX_ROWS=10000000 bash data_gen/run_phase4.sh
+```
+
+You can use `TX_ROWS=50000000` to load 50 million, up to the script's 100-million-row limit. Larger loads take longer and need more disk and memory. The loader's duplicate check still applies, so choose the row count before loading; it will not append a second batch to an existing dataset.
 
 ### 3. Open ClickHouse and check the tables
 
@@ -79,13 +87,13 @@ docker exec -i clickhouse-course clickhouse-client \
 The six files are:
 
 - `q1_daily_dashboard.sql` — daily count, amount, and unique customer/account metrics.
-- `q2_last_onehundred_transactions.sql` — a customer's most recent transaction details.
+- `q2_last_onehundred_transactions.sql` — a customer's most recent transaction details. The default one-million-row sample has about 10 transactions per customer, so it returns fewer than 100. Use `TX_ROWS=10000000` on a clean volume to generate about 100 per customer for this example.
 - `q3_top_merchant.sql` — top merchants by card-payment amount.
 - `q4_branch_performance.sql` — daily metrics for a selected branch.
 - `q5_atm_fraud.sql` — high-count, high-value ATM withdrawals within calendar hours.
 - `q6_country_dashboard.sql` — four country dashboard panels.
 
-These SQL files contain example dates, countries, and IDs that you can edit to explore different filters. The Q4 and Q5 application queries use relative dates, so they may return no rows when the loaded synthetic data is from an older date range.
+These SQL files contain example countries, IDs, and filters that you can edit to explore different results. Date windows are anchored to the latest timestamp available in the relevant table, rather than the computer's current date. That lets the fixed September 2026 sample continue to return rows even after the calendar moves on.
 
 ### 5. What is the Python file, and when should I run it?
 
@@ -96,7 +104,7 @@ python3 --version
 python3 benchmarks/run_phase5.py
 ```
 
-The script reads the saved query files, runs the serving queries and available raw-table comparisons, and asks ClickHouse for each query's duration, rows read, and bytes read. It also runs `EXPLAIN indexes = 1` for the serving queries. Q6 has four panels, so each panel is measured separately. For Q4 and Q5 it uses benchmark-only date windows that overlap the September sample data; it does not edit the application query files for those date adjustments.
+The script reads the saved query files, runs the serving queries and available raw-table comparisons, and asks ClickHouse for each query's duration, rows read, and bytes read. It also runs `EXPLAIN indexes = 1` for the serving queries. Q6 has four panels, so each panel is measured separately. Each query now chooses a date window relative to the latest data available, so benchmark filters and sample data stay aligned.
 
 The measurements and query results are written to `benchmarks/results/`. The human-readable summary is `benchmarks/results.md`. You can open the `.out` files to see query results, `.json` files to see metrics, and `_explain.txt` files to see ClickHouse's index/partition pruning explanation. Re-running the benchmark replaces these result files with a new run.
 
@@ -215,7 +223,7 @@ Amounts in aggregate tables use `Decimal(38,2)` for ClickHouse 26.8 `SimpleAggre
 
 ## Benchmark summary
 
-Phase 5 measurements used the available 2,000,600-row dataset. The rollups reduced rows and bytes read substantially for the dashboard and fraud queries. At this small scale, elapsed time varied: Q1 and Q4's raw versions were about as fast as their aggregate versions despite scanning much more data. See [benchmark details](benchmarks/results.md), including the date-window adjustments, individual query metrics, and `EXPLAIN indexes = 1` outputs.
+Phase 5 measurements used the available 1,000,300-row dataset. The rollups reduced rows and bytes read substantially for the dashboard and fraud queries. At this scale, elapsed time varied; fewer rows do not always mean a faster query when the dataset is small. See [benchmark details](benchmarks/results.md) for individual query metrics and `EXPLAIN indexes = 1` outputs.
 
 ## Project files
 

@@ -16,25 +16,25 @@ Limit (preliminary LIMIT)
             Parts: 1 | Granules: 2
             Output: merchant_id, any(merchant_name), any(merchant_category), sum(tx_count), sum(total_amount)
             Prewhere filter
-            Prewhere filter column:  country = \'DE\' AND day <= \'2026-09-30\' AND day >= \'2026-09-01\'
+            Prewhere filter column:  country = \'DE\' AND day <= 20708 AND day >= 20678
             Indexes:
               Min-Max
                 Keys:
                   day
-                Condition: and((day in (-Inf, 20726]), (day in [20697, +Inf)))
+                Condition: and((day in (-Inf, 20708]), (day in [20678, +Inf)))
                 Parts: 1/1
                 Granules: 2/2
               Partition
                 Keys:
                   toYYYYMM(day)
-                Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202609, +Inf)))
+                Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202608, +Inf)))
                 Parts: 1/1
                 Granules: 2/2
               PrimaryKey
                 Keys:
                   country
                   day
-                Condition: and(and((day in (-Inf, 20726]), (day in [20697, +Inf))), (country in [\'DE\', \'DE\']))
+                Condition: and(and((day in (-Inf, 20708]), (day in [20678, +Inf))), (country in [\'DE\', \'DE\']))
                 Parts: 1/1
                 Granules: 2/2
                 Search Algorithm: generic exclusion search

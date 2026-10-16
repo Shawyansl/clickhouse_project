@@ -12,18 +12,18 @@ Sorting (Sorting for ORDER BY)
          Parts: 1 | Granules: 1
          Output: day, sum(tx_count), sum(total_amount), uniqMerge(unique_customers), uniqMerge(unique_accounts)
          Prewhere filter
-         Prewhere filter column:  day <= \'2026-09-30\' AND day >= \'2026-09-01\' AND country = \'DE\' AND transaction_type = \'card_payment\' AND channel = \'mobile\' AND currency = \'EUR\'
+         Prewhere filter column:  day <= 20724 AND day >= 20694 AND country = \'DE\' AND transaction_type = \'card_payment\' AND channel = \'mobile\' AND currency = \'EUR\'
          Indexes:
            Min-Max
              Keys:
                day
-             Condition: and((day in (-Inf, 20726]), (day in [20697, +Inf)))
+             Condition: and((day in (-Inf, 20724]), (day in [20694, +Inf)))
              Parts: 2/2
              Granules: 2/2
            Partition
              Keys:
                toYYYYMM(day)
-             Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202609, +Inf)))
+             Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202608, +Inf)))
              Parts: 2/2
              Granules: 2/2
            PrimaryKey
@@ -33,7 +33,7 @@ Sorting (Sorting for ORDER BY)
                transaction_type
                channel
                currency
-             Condition: and((channel in [\'mobile\', \'mobile\']), and((currency in [\'EUR\', \'EUR\']), and((transaction_type in [\'card_payment\', \'card_payment\']), and((country in [\'DE\', \'DE\']), and((day in (-Inf, 20726]), (day in [20697, +Inf)))))))
+             Condition: and((channel in [\'mobile\', \'mobile\']), and((currency in [\'EUR\', \'EUR\']), and((transaction_type in [\'card_payment\', \'card_payment\']), and((country in [\'DE\', \'DE\']), and((day in (-Inf, 20724]), (day in [20694, +Inf)))))))
              Parts: 1/2
              Granules: 1/2
              Search Algorithm: generic exclusion search

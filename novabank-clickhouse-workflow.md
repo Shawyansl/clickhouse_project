@@ -105,4 +105,4 @@ Notes / decisions made so far:
 - Q5: calendar hour ATM agg; thresholds in HAVING
 - Q6: compose aggs, not raw
 - Agg `sum` amount columns use `Decimal(38, 2)` (ClickHouse 26.8 SimpleAggregateFunction requirement)
-- Phase 4: one intended load is 1,000,300 rows in Sept 2026; the local database currently has 2,000,600 rows because the non-idempotent loader was run twice. Seeded customers 900001–900020 provide Q5 cases.
+- Phase 4: the intended load is 1,000,300 rows in Sept 2026; the loader now refuses to add a second copy. Seeded customers 900001–900020 provide Q5 cases. `TX_ROWS` can scale the generated portion up to 100M rows.

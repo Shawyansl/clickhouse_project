@@ -1,4 +1,5 @@
--- Q6: Country dashboard (frequent — served from aggs, not tx_raw)
+-- Q6: Country dashboard for the latest 30 days in each serving aggregate
+-- (frequent — served from aggs, not tx_raw)
 -- Panels reuse existing tables; top branches uses country_branch_daily_agg.
 -- Change country / date range in every panel together.
 
@@ -12,7 +13,8 @@ SELECT
     uniqMerge(unique_customers)        AS unique_customers
 FROM clickhouse_course.tx_daily_agg
 WHERE country = 'DE'
-  AND day BETWEEN toDate('2026-09-01') AND toDate('2026-09-30')
+  AND day BETWEEN (SELECT max(day) - 30 FROM clickhouse_course.tx_daily_agg)
+              AND (SELECT max(day) FROM clickhouse_course.tx_daily_agg)
 GROUP BY day
 ORDER BY day;
 
@@ -26,7 +28,8 @@ SELECT
     sum(total_amount)                  AS total_amount
 FROM clickhouse_course.tx_daily_agg
 WHERE country = 'DE'
-  AND day BETWEEN toDate('2026-09-01') AND toDate('2026-09-30')
+  AND day BETWEEN (SELECT max(day) - 30 FROM clickhouse_course.tx_daily_agg)
+              AND (SELECT max(day) FROM clickhouse_course.tx_daily_agg)
 GROUP BY transaction_type
 ORDER BY total_amount DESC
 LIMIT 10;
@@ -43,7 +46,8 @@ SELECT
     sum(total_amount)                  AS total_amount
 FROM clickhouse_course.merchant_daily_agg
 WHERE country = 'DE'
-  AND day BETWEEN toDate('2026-09-01') AND toDate('2026-09-30')
+  AND day BETWEEN (SELECT max(day) - 30 FROM clickhouse_course.merchant_daily_agg)
+              AND (SELECT max(day) FROM clickhouse_course.merchant_daily_agg)
 GROUP BY merchant_id
 ORDER BY total_amount DESC
 LIMIT 10;
@@ -58,7 +62,8 @@ SELECT
     sum(total_amount)                  AS total_amount
 FROM clickhouse_course.country_branch_daily_agg
 WHERE country = 'DE'
-  AND day BETWEEN toDate('2026-09-01') AND toDate('2026-09-30')
+  AND day BETWEEN (SELECT max(day) - 30 FROM clickhouse_course.country_branch_daily_agg)
+              AND (SELECT max(day) FROM clickhouse_course.country_branch_daily_agg)
 GROUP BY branch_id
 ORDER BY total_amount DESC
 LIMIT 10;
@@ -74,7 +79,7 @@ SELECT
     uniq(customer_id) AS unique_customers
 FROM clickhouse_course.tx_raw
 WHERE country = 'DE'
-  AND tx_time >= toDateTime('2026-09-01 00:00:00')
-  AND tx_time <  toDateTime('2026-10-01 00:00:00')
+  AND tx_time >= (SELECT toStartOfDay(max(tx_time)) - INTERVAL 30 DAY FROM clickhouse_course.tx_raw)
+  AND tx_time <  (SELECT toStartOfDay(max(tx_time)) + INTERVAL 1 DAY FROM clickhouse_course.tx_raw)
 GROUP BY day
 ORDER BY day;

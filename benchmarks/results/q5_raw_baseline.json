@@ -1,11 +1,11 @@
 {
-  "query_id": "phase5_q5_raw_baseline_2e6eca9e4976",
-  "query_duration_ms": 3,
-  "read_rows": 300,
-  "read_bytes": 8730,
+  "query_id": "phase5_q5_raw_baseline_b8b6e40666d2",
+  "query_duration_ms": 5,
+  "read_rows": 302,
+  "read_bytes": 8778,
   "result_rows": 20,
   "result_bytes": 1536,
   "exception": "",
   "label": "q5_raw_baseline",
-  "recorded_at_utc": "2026-10-16T17:11:47.978362+00:00"
+  "recorded_at_utc": "2026-10-16T17:22:49.592781+00:00"
 }

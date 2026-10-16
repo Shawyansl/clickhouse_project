@@ -14,12 +14,12 @@ Sorting (Sorting for ORDER BY)
             Parts: 1 | Granules: 1
             Output: hour, customer_id, account_id, sum(tx_count), sum(total_amount)
             Prewhere filter
-            Prewhere filter column:  hour >= \'2026-09-21 00:00:00\'
+            Prewhere filter column:  hour >= 1789999200
             Indexes:
               Min-Max
                 Keys:
                   hour
-                Condition: (hour in [1789948800, +Inf))
+                Condition: (hour in [1789999200, +Inf))
                 Parts: 1/2
                 Granules: 1/32
               Partition
@@ -31,7 +31,7 @@ Sorting (Sorting for ORDER BY)
               PrimaryKey
                 Keys:
                   hour
-                Condition: (hour in [1789948800, +Inf))
+                Condition: (hour in [1789999200, +Inf))
                 Parts: 1/1
                 Granules: 1/1
                 Search Algorithm: binary search

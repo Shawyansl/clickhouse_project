@@ -1,11 +1,11 @@
 {
-  "query_id": "phase5_q6_optimized_panel4_6c38cbc5a4c9",
-  "query_duration_ms": 3,
-  "read_rows": 1820,
-  "read_bytes": 56496,
+  "query_id": "phase5_q6_optimized_panel4_03a34505d59e",
+  "query_duration_ms": 5,
+  "read_rows": 1824,
+  "read_bytes": 56560,
   "result_rows": 10,
   "result_bytes": 664,
   "exception": "",
   "label": "q6_optimized_panel4",
-  "recorded_at_utc": "2026-10-16T17:11:49.969384+00:00"
+  "recorded_at_utc": "2026-10-16T17:22:51.965058+00:00"
 }

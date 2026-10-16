@@ -12,18 +12,18 @@ Sorting (Sorting for ORDER BY)
          Parts: 1 | Granules: 1
          Output: day, branch_id, tx_count, customers_state, deposit_amount, withdrawal_amount, transfer_amount
          Prewhere filter
-         Prewhere filter column:  branch_id = 42 AND day >= \'2026-09-01\'
+         Prewhere filter column:  branch_id = 42 AND day >= 20694
          Indexes:
            Min-Max
              Keys:
                day
-             Condition: (day in [20697, +Inf))
+             Condition: (day in [20694, +Inf))
              Parts: 2/2
              Granules: 2/2
            Partition
              Keys:
                toYYYYMM(day)
-             Condition: (toYYYYMM(day) in [202609, +Inf))
+             Condition: (toYYYYMM(day) in [202608, +Inf))
              Parts: 2/2
              Granules: 2/2
            Statistics
@@ -36,7 +36,7 @@ Sorting (Sorting for ORDER BY)
              Keys:
                branch_id
                day
-             Condition: and((day in [20697, +Inf)), (branch_id in [42, 42]))
+             Condition: and((day in [20694, +Inf)), (branch_id in [42, 42]))
              Parts: 1/1
              Granules: 1/1
              Search Algorithm: binary search

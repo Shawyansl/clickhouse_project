@@ -1,4 +1,5 @@
--- Phase 4: ~1M synthetic transactions into tx_raw (MVs fill aggs automatically).
+-- Phase 4: synthetic transactions into tx_raw (MVs fill aggs automatically).
+-- Row count is supplied by the loader as the {rows:UInt64} query parameter.
 -- Time window: 2026-09-01 .. 2026-09-30 (matches sample filters in sql/queries/).
 
 INSERT INTO clickhouse_course.tx_raw
@@ -50,5 +51,5 @@ FROM
             1 + (number % 5)
         ) AS mcat,
         1 + (number % 200) AS bid
-    FROM numbers(1000000)
+    FROM numbers({rows:UInt64})
 );
