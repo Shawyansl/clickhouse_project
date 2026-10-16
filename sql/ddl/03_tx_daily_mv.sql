@@ -1,6 +1,6 @@
 CREATE MATERIALIZED VIEW tx_daily_mv TO tx_daily_agg AS
 SELECT
-    toDate(event_time)       AS day,
+    toDate(tx_time)       AS day,
     country, transaction_type, channel, currency,
     count()                  AS tx_count,
     sum(amount)              AS total_amount,
