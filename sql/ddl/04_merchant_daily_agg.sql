@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS clickhouse_course.merchant_daily_agg
     merchant_id       UInt64,
     merchant_name     SimpleAggregateFunction(any, String),
     tx_count          SimpleAggregateFunction(sum, UInt64),
-    total_amount      SimpleAggregateFunction(sum, Decimal(18, 2)),
+    total_amount      SimpleAggregateFunction(sum, Decimal(38, 2)),
     customers_state   AggregateFunction(uniq, UInt64)
 )
 ENGINE = AggregatingMergeTree

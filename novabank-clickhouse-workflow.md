@@ -94,7 +94,7 @@ Deliverable: final `README.md`
 - [x] Phase 1: Access-pattern matrix (`docs/access_patterns.md`)
 - [x] Phase 2: Design decisions (`docs/design.md`)
 - [x] Phase 3: DDL + queries Q1–Q6
-- [ ] Phase 4: Data
+- [x] Phase 4: Data (~1M + fraud hotspots via `data_gen/run_phase4.sh`)
 - [ ] Phase 5: Benchmarks
 - [ ] Phase 6: Documentation
 
@@ -104,3 +104,5 @@ Notes / decisions made so far:
 - Q4 vs Q6 branches: two tables (`branch_daily_agg` vs `country_branch_daily_agg`)
 - Q5: calendar hour ATM agg; thresholds in HAVING
 - Q6: compose aggs, not raw
+- Agg `sum` amount columns use `Decimal(38, 2)` (ClickHouse 26.8 SimpleAggregateFunction requirement)
+- Phase 4: 1_000_300 rows in Sept 2026; seeded customers 900001–900020 for Q5

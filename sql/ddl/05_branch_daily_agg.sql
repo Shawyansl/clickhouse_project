@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS clickhouse_course.branch_daily_agg
     branch_id           UInt32,
     tx_count            SimpleAggregateFunction(sum, UInt64),
     customers_state     AggregateFunction(uniq, UInt64),
-    deposit_amount      SimpleAggregateFunction(sum, Decimal(18, 2)),
-    withdrawal_amount   SimpleAggregateFunction(sum, Decimal(18, 2)),
-    transfer_amount     SimpleAggregateFunction(sum, Decimal(18, 2))
+    deposit_amount      SimpleAggregateFunction(sum, Decimal(38, 2)),
+    withdrawal_amount   SimpleAggregateFunction(sum, Decimal(38, 2)),
+    transfer_amount     SimpleAggregateFunction(sum, Decimal(38, 2))
 )
 ENGINE = AggregatingMergeTree
 PARTITION BY toYYYYMM(day)

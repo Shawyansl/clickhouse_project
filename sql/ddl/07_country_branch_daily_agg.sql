@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS clickhouse_course.country_branch_daily_agg
     country         LowCardinality(String),
     branch_id       UInt32,
     tx_count        SimpleAggregateFunction(sum, UInt64),
-    total_amount    SimpleAggregateFunction(sum, Decimal(18, 2))
+    total_amount    SimpleAggregateFunction(sum, Decimal(38, 2))
 )
 ENGINE = AggregatingMergeTree
 PARTITION BY toYYYYMM(day)
