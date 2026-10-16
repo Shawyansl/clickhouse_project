@@ -13,7 +13,7 @@ SELECT
 FROM clickhouse_course.merchant_daily_agg
 WHERE day BETWEEN toDate('2026-09-01') AND toDate('2026-09-30')
   AND country = 'DE'
-  AND merchant_category = 'grocery'
+  AND clickhouse_course.merchant_daily_agg.merchant_category = 'grocery'
 GROUP BY merchant_id
 ORDER BY total DESC
 LIMIT 20;
@@ -33,7 +33,7 @@ WHERE transaction_type = 'card_payment'
   AND tx_time >= toDateTime('2026-09-01 00:00:00')
   AND tx_time <  toDateTime('2026-10-01 00:00:00')
   AND country = 'DE'
-  AND merchant_category = 'grocery'
+  AND clickhouse_course.tx_raw.merchant_category = 'grocery'
 GROUP BY merchant_id
 ORDER BY total DESC
 LIMIT 20;

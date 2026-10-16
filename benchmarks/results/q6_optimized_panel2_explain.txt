@@ -1,0 +1,41 @@
+explain
+Output: transaction_type, sum(tx_count), sum(total_amount)
+
+Limit (preliminary LIMIT)
+│  Limit 10
+│  Offset 0
+└──Sorting (Sorting for ORDER BY)
+   │  Sort description: sum(total_amount) DESC
+   │  Limit 10
+   └──Aggregating
+      │  Keys: transaction_type
+      │  Aggregates: sum(tx_count), sum(total_amount)
+      │  Skip merging: 0
+      └──ReadFromMergeTree (clickhouse_course.tx_daily_agg)
+            Read type: Default
+            Parts: 2 | Granules: 2
+            Output: transaction_type, sum(tx_count), sum(total_amount)
+            Prewhere filter
+            Prewhere filter column:  day <= \'2026-09-30\' AND day >= \'2026-09-01\' AND country = \'DE\'
+            Indexes:
+              Min-Max
+                Keys:
+                  day
+                Condition: and((day in (-Inf, 20726]), (day in [20697, +Inf)))
+                Parts: 2/2
+                Granules: 2/2
+              Partition
+                Keys:
+                  toYYYYMM(day)
+                Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202609, +Inf)))
+                Parts: 2/2
+                Granules: 2/2
+              PrimaryKey
+                Keys:
+                  day
+                  country
+                Condition: and(and((day in (-Inf, 20726]), (day in [20697, +Inf))), (country in [\'DE\', \'DE\']))
+                Parts: 2/2
+                Granules: 2/2
+                Search Algorithm: generic exclusion search
+              Ranges: 2

@@ -1,0 +1,38 @@
+explain
+Output: customer_id, account_id, hour, sum(tx_count), sum(total_amount)
+
+Sorting (Sorting for ORDER BY)
+│  Sort description: hour DESC, sum(total_amount) DESC
+└──Filter (HAVING)
+   │  Filter column: sum(tx_count) > 10 AND sum(total_amount) > 5000
+   └──Aggregating
+      │  Keys: customer_id, account_id, hour
+      │  Aggregates: sum(tx_count), sum(total_amount)
+      │  Skip merging: 0
+      └──ReadFromMergeTree (clickhouse_course.atm_hourly_agg)
+            Read type: Default
+            Parts: 1 | Granules: 1
+            Output: hour, customer_id, account_id, sum(tx_count), sum(total_amount)
+            Prewhere filter
+            Prewhere filter column:  hour >= \'2026-09-21 00:00:00\'
+            Indexes:
+              Min-Max
+                Keys:
+                  hour
+                Condition: (hour in [1789948800, +Inf))
+                Parts: 1/2
+                Granules: 1/32
+              Partition
+                Keys:
+                  toYYYYMM(hour)
+                Condition: (toYYYYMM(hour) in [202609, +Inf))
+                Parts: 1/1
+                Granules: 1/1
+              PrimaryKey
+                Keys:
+                  hour
+                Condition: (hour in [1789948800, +Inf))
+                Parts: 1/1
+                Granules: 1/1
+                Search Algorithm: binary search
+              Ranges: 1

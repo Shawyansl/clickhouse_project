@@ -1,0 +1,11 @@
+{
+  "query_id": "phase5_q2_optimized_a8600730d923",
+  "query_duration_ms": 3,
+  "read_rows": 16384,
+  "read_bytes": 187450,
+  "result_rows": 10,
+  "result_bytes": 68405,
+  "exception": "",
+  "label": "q2_optimized",
+  "recorded_at_utc": "2026-10-16T17:11:44.951506+00:00"
+}

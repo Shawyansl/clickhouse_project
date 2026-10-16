@@ -95,8 +95,8 @@ Deliverable: final `README.md`
 - [x] Phase 2: Design decisions (`docs/design.md`)
 - [x] Phase 3: DDL + queries Q1–Q6
 - [x] Phase 4: Data (~1M + fraud hotspots via `data_gen/run_phase4.sh`)
-- [ ] Phase 5: Benchmarks
-- [ ] Phase 6: Documentation
+- [x] Phase 5: Benchmarks (`benchmarks/results.md`; runner and raw outputs in `benchmarks/`)
+- [x] Phase 6: Documentation (`README.md`)
 
 Notes / decisions made so far:
 - `tx_raw` ORDER BY customer-first for Q2; dashboards on separate AggregatingMergeTree + MVs
@@ -105,4 +105,4 @@ Notes / decisions made so far:
 - Q5: calendar hour ATM agg; thresholds in HAVING
 - Q6: compose aggs, not raw
 - Agg `sum` amount columns use `Decimal(38, 2)` (ClickHouse 26.8 SimpleAggregateFunction requirement)
-- Phase 4: 1_000_300 rows in Sept 2026; seeded customers 900001–900020 for Q5
+- Phase 4: one intended load is 1,000,300 rows in Sept 2026; the local database currently has 2,000,600 rows because the non-idempotent loader was run twice. Seeded customers 900001–900020 provide Q5 cases.

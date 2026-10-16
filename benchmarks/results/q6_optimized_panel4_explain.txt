@@ -1,0 +1,41 @@
+explain
+Output: branch_id, sum(tx_count), sum(total_amount)
+
+Limit (preliminary LIMIT)
+│  Limit 10
+│  Offset 0
+└──Sorting (Sorting for ORDER BY)
+   │  Sort description: sum(total_amount) DESC
+   │  Limit 10
+   └──Aggregating
+      │  Keys: branch_id
+      │  Aggregates: sum(tx_count), sum(total_amount)
+      │  Skip merging: 0
+      └──ReadFromMergeTree (clickhouse_course.country_branch_daily_agg)
+            Read type: Default
+            Parts: 2 | Granules: 2
+            Output: branch_id, sum(tx_count), sum(total_amount)
+            Prewhere filter
+            Prewhere filter column:  country = \'DE\' AND day <= \'2026-09-30\' AND day >= \'2026-09-01\'
+            Indexes:
+              Min-Max
+                Keys:
+                  day
+                Condition: and((day in (-Inf, 20726]), (day in [20697, +Inf)))
+                Parts: 2/2
+                Granules: 2/2
+              Partition
+                Keys:
+                  toYYYYMM(day)
+                Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202609, +Inf)))
+                Parts: 2/2
+                Granules: 2/2
+              PrimaryKey
+                Keys:
+                  country
+                  day
+                Condition: and(and((day in (-Inf, 20726]), (day in [20697, +Inf))), (country in [\'DE\', \'DE\']))
+                Parts: 2/2
+                Granules: 2/2
+                Search Algorithm: binary search
+              Ranges: 2

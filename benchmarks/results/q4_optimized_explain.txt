@@ -1,0 +1,43 @@
+explain
+Output: day, branch_id, sum(tx_count), uniqMerge(customers_state), sum(deposit_amount), sum(withdrawal_amount), sum(transfer_amount)
+
+Sorting (Sorting for ORDER BY)
+│  Sort description: day ASC
+└──Aggregating
+   │  Keys: day, branch_id
+   │  Aggregates: sum(tx_count), uniqMerge(customers_state), sum(deposit_amount), sum(withdrawal_amount), sum(transfer_amount)
+   │  Skip merging: 0
+   └──ReadFromMergeTree (clickhouse_course.branch_daily_agg)
+         Read type: Default
+         Parts: 1 | Granules: 1
+         Output: day, branch_id, tx_count, customers_state, deposit_amount, withdrawal_amount, transfer_amount
+         Prewhere filter
+         Prewhere filter column:  branch_id = 42 AND day >= \'2026-09-01\'
+         Indexes:
+           Min-Max
+             Keys:
+               day
+             Condition: (day in [20697, +Inf))
+             Parts: 2/2
+             Granules: 2/2
+           Partition
+             Keys:
+               toYYYYMM(day)
+             Condition: (toYYYYMM(day) in [202609, +Inf))
+             Parts: 2/2
+             Granules: 2/2
+           Statistics
+             Keys:
+               branch_id
+               day
+             Parts: 1/2
+             Granules: 1/2
+           PrimaryKey
+             Keys:
+               branch_id
+               day
+             Condition: and((day in [20697, +Inf)), (branch_id in [42, 42]))
+             Parts: 1/1
+             Granules: 1/1
+             Search Algorithm: binary search
+           Ranges: 1

@@ -1,0 +1,12 @@
+merchant_id	merchant_name	merchant_category	tx_count	total_amount
+UInt64	SimpleAggregateFunction(any, String)	String	UInt64	Decimal(38, 2)
+4981	Merchant_4981	grocery	200	56960
+4961	Merchant_4961	grocery	200	56920
+4941	Merchant_4941	grocery	200	56879.6
+4921	Merchant_4921	grocery	200	56839.8
+4901	Merchant_4901	grocery	200	56800
+4881	Merchant_4881	grocery	200	56760
+4861	Merchant_4861	grocery	200	56720
+4841	Merchant_4841	grocery	200	56679.6
+4821	Merchant_4821	grocery	200	56639.8
+4801	Merchant_4801	grocery	200	56600

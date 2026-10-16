@@ -1,0 +1,43 @@
+explain
+Output: transaction_id, tx_time, account_id, transaction_type, channel, currency, amount, merchant_name, status
+
+JoinLazyColumnsStep
+├──Limit (preliminary LIMIT)
+│  │  Limit 100
+│  │  Offset 0
+│  └──Sorting (Sorting for ORDER BY)
+│     │  Prefix sort description: tx_time DESC
+│     │  Result sort description: tx_time DESC
+│     │  Limit 100
+│     └──Filter
+│        │  Filter column: customer_id = 12345
+│        └──ReadFromMergeTree (clickhouse_course.tx_raw)
+│              Read type: InReverseOrder
+│              Parts: 1 | Granules: 1
+│              Output: tx_time, _part_offset, _part_starting_offset, customer_id
+│              Prewhere filter
+│              Prewhere filter column:  __topKFilter(tx_time)
+│              Indexes:
+│                Min-Max
+│                  Condition: true
+│                  Parts: 2/2
+│                  Granules: 124/124
+│                Partition
+│                  Condition: true
+│                  Parts: 2/2
+│                  Granules: 124/124
+│                Statistics
+│                  Keys:
+│                    customer_id
+│                  Parts: 1/2
+│                  Granules: 123/124
+│                PrimaryKey
+│                  Keys:
+│                    customer_id
+│                  Condition: (customer_id in [12345, 12345])
+│                  Parts: 1/1
+│                  Granules: 1/123
+│                  Search Algorithm: binary search
+│                Ranges: 1
+└──LazilyReadFromMergeTree
+      Lazily read columns: transaction_id, account_id, transaction_type, channel, currency, amount, merchant_name, status

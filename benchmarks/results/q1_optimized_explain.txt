@@ -1,0 +1,40 @@
+explain
+Output: day, sum(tx_count), sum(total_amount), uniqMerge(unique_customers), uniqMerge(unique_accounts), sum(total_amount) / sum(tx_count)
+
+Sorting (Sorting for ORDER BY)
+│  Sort description: day ASC
+└──Aggregating
+   │  Keys: day
+   │  Aggregates: sum(tx_count), sum(total_amount), uniqMerge(unique_customers), uniqMerge(unique_accounts)
+   │  Skip merging: 0
+   └──ReadFromMergeTree (clickhouse_course.tx_daily_agg)
+         Read type: Default
+         Parts: 1 | Granules: 1
+         Output: day, sum(tx_count), sum(total_amount), uniqMerge(unique_customers), uniqMerge(unique_accounts)
+         Prewhere filter
+         Prewhere filter column:  day <= \'2026-09-30\' AND day >= \'2026-09-01\' AND country = \'DE\' AND transaction_type = \'card_payment\' AND channel = \'mobile\' AND currency = \'EUR\'
+         Indexes:
+           Min-Max
+             Keys:
+               day
+             Condition: and((day in (-Inf, 20726]), (day in [20697, +Inf)))
+             Parts: 2/2
+             Granules: 2/2
+           Partition
+             Keys:
+               toYYYYMM(day)
+             Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202609, +Inf)))
+             Parts: 2/2
+             Granules: 2/2
+           PrimaryKey
+             Keys:
+               day
+               country
+               transaction_type
+               channel
+               currency
+             Condition: and((channel in [\'mobile\', \'mobile\']), and((currency in [\'EUR\', \'EUR\']), and((transaction_type in [\'card_payment\', \'card_payment\']), and((country in [\'DE\', \'DE\']), and((day in (-Inf, 20726]), (day in [20697, +Inf)))))))
+             Parts: 1/2
+             Granules: 1/2
+             Search Algorithm: generic exclusion search
+           Ranges: 1

@@ -1,0 +1,156 @@
+[
+  {
+    "query_id": "phase5_q1_optimized_2dc2f404e8fb",
+    "query_duration_ms": 33,
+    "read_rows": 720,
+    "read_bytes": 148579,
+    "result_rows": 12,
+    "result_bytes": 1698,
+    "exception": "",
+    "label": "q1_optimized",
+    "recorded_at_utc": "2026-10-16T17:11:43.917395+00:00"
+  },
+  {
+    "query_id": "phase5_q1_raw_baseline_e6aa4e33a0ab",
+    "query_duration_ms": 13,
+    "read_rows": 1000300,
+    "read_bytes": 32000956,
+    "result_rows": 12,
+    "result_bytes": 1442,
+    "exception": "",
+    "label": "q1_raw_baseline",
+    "recorded_at_utc": "2026-10-16T17:11:44.496267+00:00"
+  },
+  {
+    "query_id": "phase5_q2_optimized_a8600730d923",
+    "query_duration_ms": 3,
+    "read_rows": 16384,
+    "read_bytes": 187450,
+    "result_rows": 10,
+    "result_bytes": 68405,
+    "exception": "",
+    "label": "q2_optimized",
+    "recorded_at_utc": "2026-10-16T17:11:44.951506+00:00"
+  },
+  {
+    "query_id": "phase5_q3_optimized_4b04df94b197",
+    "query_duration_ms": 10,
+    "read_rows": 15000,
+    "read_bytes": 2096808,
+    "result_rows": 20,
+    "result_bytes": 3054,
+    "exception": "",
+    "label": "q3_optimized",
+    "recorded_at_utc": "2026-10-16T17:11:45.495657+00:00"
+  },
+  {
+    "query_id": "phase5_q3_raw_baseline_9bc42621ae45",
+    "query_duration_ms": 14,
+    "read_rows": 1000300,
+    "read_bytes": 33195048,
+    "result_rows": 20,
+    "result_bytes": 26112,
+    "exception": "",
+    "label": "q3_raw_baseline",
+    "recorded_at_utc": "2026-10-16T17:11:46.039795+00:00"
+  },
+  {
+    "query_id": "phase5_q4_optimized_d71269475d9d",
+    "query_duration_ms": 10,
+    "read_rows": 1800,
+    "read_bytes": 270000,
+    "result_rows": 12,
+    "result_bytes": 1736,
+    "exception": "",
+    "label": "q4_optimized",
+    "recorded_at_utc": "2026-10-16T17:11:46.523624+00:00"
+  },
+  {
+    "query_id": "phase5_q4_raw_baseline_a3a5b11d3102",
+    "query_duration_ms": 9,
+    "read_rows": 1000000,
+    "read_bytes": 25000000,
+    "result_rows": 12,
+    "result_bytes": 12432,
+    "exception": "",
+    "label": "q4_raw_baseline",
+    "recorded_at_utc": "2026-10-16T17:11:47.036856+00:00"
+  },
+  {
+    "query_id": "phase5_q5_optimized_83fd05de2706",
+    "query_duration_ms": 2,
+    "read_rows": 20,
+    "read_bytes": 880,
+    "result_rows": 20,
+    "result_bytes": 1560,
+    "exception": "",
+    "label": "q5_optimized",
+    "recorded_at_utc": "2026-10-16T17:11:47.476215+00:00"
+  },
+  {
+    "query_id": "phase5_q5_raw_baseline_2e6eca9e4976",
+    "query_duration_ms": 3,
+    "read_rows": 300,
+    "read_bytes": 8730,
+    "result_rows": 20,
+    "result_bytes": 1536,
+    "exception": "",
+    "label": "q5_raw_baseline",
+    "recorded_at_utc": "2026-10-16T17:11:47.978362+00:00"
+  },
+  {
+    "query_id": "phase5_q6_optimized_panel1_280e655689a3",
+    "query_duration_ms": 43,
+    "read_rows": 721,
+    "read_bytes": 82991,
+    "result_rows": 13,
+    "result_bytes": 964,
+    "exception": "",
+    "label": "q6_optimized_panel1",
+    "recorded_at_utc": "2026-10-16T17:11:48.398689+00:00"
+  },
+  {
+    "query_id": "phase5_q6_optimized_panel2_f10565b7ce6d",
+    "query_duration_ms": 3,
+    "read_rows": 721,
+    "read_bytes": 20385,
+    "result_rows": 4,
+    "result_bytes": 3043,
+    "exception": "",
+    "label": "q6_optimized_panel2",
+    "recorded_at_utc": "2026-10-16T17:11:48.955781+00:00"
+  },
+  {
+    "query_id": "phase5_q6_optimized_panel3_aa7d2740da7d",
+    "query_duration_ms": 3,
+    "read_rows": 15000,
+    "read_bytes": 776808,
+    "result_rows": 10,
+    "result_bytes": 1574,
+    "exception": "",
+    "label": "q6_optimized_panel3",
+    "recorded_at_utc": "2026-10-16T17:11:49.450380+00:00"
+  },
+  {
+    "query_id": "phase5_q6_optimized_panel4_6c38cbc5a4c9",
+    "query_duration_ms": 3,
+    "read_rows": 1820,
+    "read_bytes": 56496,
+    "result_rows": 10,
+    "result_bytes": 664,
+    "exception": "",
+    "label": "q6_optimized_panel4",
+    "recorded_at_utc": "2026-10-16T17:11:49.969384+00:00"
+  },
+  {
+    "query_id": "phase5_q6_raw_baseline_panel1_722d4c1c8c76",
+    "query_duration_ms": 10,
+    "read_rows": 1000300,
+    "read_bytes": 21006318,
+    "result_rows": 13,
+    "result_bytes": 964,
+    "exception": "",
+    "label": "q6_raw_baseline_panel1",
+    "recorded_at_utc": "2026-10-16T17:11:50.483370+00:00"
+  }
+]

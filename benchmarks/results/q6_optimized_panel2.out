@@ -1,0 +1,6 @@
+transaction_type	tx_count	total_amount
+LowCardinality(String)	UInt64	Decimal(38, 2)
+atm_withdrawal	50300	13119972.4
+cash_deposit	50000	13002472.2
+bank_transfer	50000	12997472.2
+card_payment	50000	12994971.8

@@ -1,0 +1,22 @@
+merchant_id	merchant_name	merchant_category	transactions	unique_customers	total	avg_amount
+UInt32	String	String	UInt64	UInt64	Decimal(38, 2)	Float64
+4981	Merchant_4981	grocery	200	20	56960	284.8
+4961	Merchant_4961	grocery	200	20	56920	284.6
+4941	Merchant_4941	grocery	200	20	56879.6	284.39799999999997
+4921	Merchant_4921	grocery	200	20	56839.8	284.199
+4901	Merchant_4901	grocery	200	20	56800	284
+4881	Merchant_4881	grocery	200	20	56760	283.8
+4861	Merchant_4861	grocery	200	20	56720	283.6
+4841	Merchant_4841	grocery	200	20	56679.6	283.39799999999997
+4821	Merchant_4821	grocery	200	20	56639.8	283.199
+4801	Merchant_4801	grocery	200	20	56600	283
+4781	Merchant_4781	grocery	200	20	56560	282.8
+4761	Merchant_4761	grocery	200	20	56520	282.6
+4741	Merchant_4741	grocery	200	20	56479.6	282.39799999999997
+4721	Merchant_4721	grocery	200	20	56439.8	282.199
+4701	Merchant_4701	grocery	200	20	56400	282
+4681	Merchant_4681	grocery	200	20	56360	281.8
+4661	Merchant_4661	grocery	200	20	56320	281.6
+4641	Merchant_4641	grocery	200	20	56279.6	281.39799999999997
+4621	Merchant_4621	grocery	200	20	56239.8	281.199
+4601	Merchant_4601	grocery	200	20	56200	281

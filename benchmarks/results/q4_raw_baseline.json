@@ -1,0 +1,11 @@
+{
+  "query_id": "phase5_q4_raw_baseline_a3a5b11d3102",
+  "query_duration_ms": 9,
+  "read_rows": 1000000,
+  "read_bytes": 25000000,
+  "result_rows": 12,
+  "result_bytes": 12432,
+  "exception": "",
+  "label": "q4_raw_baseline",
+  "recorded_at_utc": "2026-10-16T17:11:47.036856+00:00"
+}

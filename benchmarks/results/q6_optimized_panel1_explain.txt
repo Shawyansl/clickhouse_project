@@ -1,0 +1,37 @@
+explain
+Output: day, sum(tx_count), sum(total_amount), uniqMerge(unique_customers)
+
+Sorting (Sorting for ORDER BY)
+│  Sort description: day ASC
+└──Aggregating
+   │  Keys: day
+   │  Aggregates: sum(tx_count), sum(total_amount), uniqMerge(unique_customers)
+   │  Skip merging: 0
+   └──ReadFromMergeTree (clickhouse_course.tx_daily_agg)
+         Read type: Default
+         Parts: 2 | Granules: 2
+         Output: day, sum(tx_count), sum(total_amount), uniqMerge(unique_customers)
+         Prewhere filter
+         Prewhere filter column:  day <= \'2026-09-30\' AND day >= \'2026-09-01\' AND country = \'DE\'
+         Indexes:
+           Min-Max
+             Keys:
+               day
+             Condition: and((day in (-Inf, 20726]), (day in [20697, +Inf)))
+             Parts: 2/2
+             Granules: 2/2
+           Partition
+             Keys:
+               toYYYYMM(day)
+             Condition: and((toYYYYMM(day) in (-Inf, 202609]), (toYYYYMM(day) in [202609, +Inf)))
+             Parts: 2/2
+             Granules: 2/2
+           PrimaryKey
+             Keys:
+               day
+               country
+             Condition: and(and((day in (-Inf, 20726]), (day in [20697, +Inf))), (country in [\'DE\', \'DE\']))
+             Parts: 2/2
+             Granules: 2/2
+             Search Algorithm: generic exclusion search
+           Ranges: 2

@@ -1,0 +1,12 @@
+transaction_id	tx_time	account_id	transaction_type	channel	currency	amount	merchant_name	status
+UUID	DateTime	UInt64	LowCardinality(String)	LowCardinality(String)	LowCardinality(String)	Decimal(18, 2)	String	LowCardinality(String)
+5ad19adb-7ec2-4232-aeda-b43e4b018205	2026-09-11 13:25:44	12345	card_payment	pos	GBP	133.44	Merchant_2345	completed
+ae8bda45-3fa0-4690-a385-91dda7b105a6	2026-09-10 09:39:04	62345	card_payment	pos	USD	133.44	Merchant_2345	completed
+7114c817-96ca-4be0-b024-f1be9bfc199c	2026-09-09 05:52:24	112345	card_payment	pos	EUR	133.44	Merchant_2345	completed
+a94644c5-43da-439d-96ba-fb31743f56a8	2026-09-08 02:05:44	12345	card_payment	pos	GBP	133.44	Merchant_2345	completed
+15f2f9fd-ba04-46ee-821d-2b95243c1b67	2026-09-06 22:19:04	62345	card_payment	pos	USD	133.44	Merchant_2345	completed
+33804da6-f7a1-4278-8af6-dd35a3d6a8ed	2026-09-05 18:32:24	112345	card_payment	pos	EUR	133.44	Merchant_2345	completed
+4d3838d7-7a42-4142-a134-32c93b2a7c3e	2026-09-04 14:45:44	12345	card_payment	pos	GBP	133.44	Merchant_2345	completed
+bf7f5212-67eb-4079-8f0c-42ac1744ef3c	2026-09-03 10:59:04	62345	card_payment	pos	USD	133.44	Merchant_2345	completed
+a4dd14cd-214b-47cd-9491-7935bea5b434	2026-09-02 07:12:24	112345	card_payment	pos	EUR	133.44	Merchant_2345	completed
+c8cddd56-90ff-40ab-bade-2c4d9a32f2b6	2026-09-01 03:25:44	12345	card_payment	pos	GBP	133.44	Merchant_2345	completed
